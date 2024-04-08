@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication0226.Models;
 
 namespace WebApplication0226.Controllers
 {
@@ -13,9 +14,12 @@ namespace WebApplication0226.Controllers
     {
         // GET: api/bot
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<botM> Get()
         {
-            return new string[] { "value3", "value4" };
+            return new botM[]
+            {
+                new botM(){ID = 1,type = "魔神",hp = 4200,atk = 60,def = 10,spd = 1.1f}
+            };
         }
 
         // GET: api/bot/5
