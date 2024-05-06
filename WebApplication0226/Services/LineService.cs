@@ -12,11 +12,29 @@ public class LineService : ILineService
     {
         var result = null as List<ISendMessage>;
 
+       /* if (message.Contains("現代參考"))
+        {
+            result = new List<ISendMessage>
+            {
+                new TextMessage($"hello"),new ImageMessage("https://i.pinimg.com/564x/13/00/69/13006906dffc0691640f76b2f2f776ba.jpg",
+                    "https://i.pinimg.com/564x/13/00/69/13006906dffc0691640f76b2f2f776ba.jpg",null),
+                
+            };
+        }*/
+
+        var rand = new Random(new Guid());
+        rand.Next(imageurl.Length);
+        string[] imageurl = new string[]
+        {
+            ""
+        };
+        
         result = new List<ISendMessage>
         {
-            new TextMessage($"hello")
-            new TextMessage($"Receive a text event message \nchannelId={channelId}  \nuserId={userId}")
+            new TextMessage($"hello"),new ImageMessage(imageurl[Index],imageurl[Index]null),
+                
         };
+        
         return result;
     }
 
