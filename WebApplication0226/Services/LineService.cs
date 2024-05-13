@@ -22,20 +22,29 @@ public class LineService : ILineService
             };
         }*/
 
-        var rand = new Random(new Guid());
-        rand.Next(imageurl.Length);
-        string[] imageurl = new string[]
-        {
-            ""
-        };
-        
-        result = new List<ISendMessage>
-        {
-            new TextMessage($"hello"),new ImageMessage(imageurl[Index],imageurl[Index]null),
-                
-        };
-        
-        return result;
+       if (message.Contains("現代參考"))
+       {
+           string[] imageurl = new string[]
+           {
+               "https://i.pinimg.com/564x/13/00/69/13006906dffc0691640f76b2f2f776ba.jpg",
+               "https://i.pinimg.com/564x/56/0d/11/560d11bacbf9e8d7a4d1a20d04b8562f.jpg",
+               "https://i.pinimg.com/originals/fd/6a/0e/fd6a0efe38d4f99147aa8706b95b0f24.jpg",
+           };
+           var rand = new Random((int)DateTime.Now.TimeOfDay.TotalSeconds);
+           int index = rand.Next(imageurl.Length);
+
+          return new List<ISendMessage>
+           {
+               new TextMessage($"hello"), new ImageMessage(imageurl[index], imageurl[index], null),
+
+           };
+       }
+
+       result = new List<ISendMessage>
+       {
+           new TextMessage($"Receive a sticker event message \nchannelId={channelId}  \nuserId={userId}")
+       };
+       return result;
     }
 
     public async Task<List<ISendMessage>> ProcessStickerEventMessageAsync(string channelId, string userId,string packageId, string stickerId)
