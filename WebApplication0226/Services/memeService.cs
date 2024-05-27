@@ -9,7 +9,16 @@ public class memeService
         List<memeM> result = new List<memeM>();
         try
         {
-
+            HttpClient client = new HttpClient();
+            client.GetAsync("")
+                
+            Product product = null;
+            HttpResponseMessage response = await client.GetAsync(path);
+            if (response.IsSuccessStatusCode)
+            {
+                product = await response.Content.ReadAsAsync<List<memeM>>();
+            }
+            return product;
         }
         catch (Exception exp)
         {
