@@ -1,53 +1,70 @@
 using System.Drawing;
 using Line.Messaging;
 using Line.Messaging.Webhooks;
+using WebApplication0226.Models;
+using WebApplication0226.Services;
 
 public class LineService : ILineService
 {
+    private readonly memeService _memeService;
+
     public LineService()
     {
+        _memeService = new memeService();
     }
 
     public async Task<List<ISendMessage>> ProcessTextEventMessageAsync(string channelId, string userId, string message)
     {
         var result = null as List<ISendMessage>;
 
-       /* if (message.Contains("現代參考"))
+        if (message.Contains("梗圖"))
         {
-            result = new List<ISendMessage>
+            List<memeM> data = await _memeService.List(); //呼叫自己定義的服務
+            int index = (new Random()).Next(0, data.Count); //取亂數
+
+            return new List<ISendMessage>
             {
-                new TextMessage($"hello"),new ImageMessage("https://i.pinimg.com/564x/13/00/69/13006906dffc0691640f76b2f2f776ba.jpg",
-                    "https://i.pinimg.com/564x/13/00/69/13006906dffc0691640f76b2f2f776ba.jpg",null),
-                
+                new ImageMessage(data[index].src, data[index].src, null),
             };
-        }*/
+        }
 
-       if (message.Contains("現代參考"))
-       {
-           string[] imageurl = new string[]
-           {
-               "https://i.pinimg.com/564x/13/00/69/13006906dffc0691640f76b2f2f776ba.jpg",
-               "https://i.pinimg.com/564x/56/0d/11/560d11bacbf9e8d7a4d1a20d04b8562f.jpg",
-               "https://i.pinimg.com/originals/fd/6a/0e/fd6a0efe38d4f99147aa8706b95b0f24.jpg",
-           };
-           var rand = new Random((int)DateTime.Now.TimeOfDay.TotalSeconds);
-           int index = rand.Next(imageurl.Length);
 
-          return new List<ISendMessage>
-           {
-               new TextMessage($"hello"), new ImageMessage(imageurl[index], imageurl[index], null),
+        /* if (message.Contains("現代參考"))
+         {
+             result = new List<ISendMessage>
+             {
+                 new TextMessage($"hello"),new ImageMessage("https://i.pinimg.com/564x/13/00/69/13006906dffc0691640f76b2f2f776ba.jpg",
+                     "https://i.pinimg.com/564x/13/00/69/13006906dffc0691640f76b2f2f776ba.jpg",null),
 
-           };
-       }
+             };
+         }*/
 
-       result = new List<ISendMessage>
-       {
-           new TextMessage($"Receive a sticker event message \nchannelId={channelId}  \nuserId={userId}")
-       };
-       return result;
+        if (message.Contains("現代參考"))
+        {
+            string[] imageurl = new string[]
+            {
+                "https://i.pinimg.com/564x/13/00/69/13006906dffc0691640f76b2f2f776ba.jpg",
+                "https://i.pinimg.com/564x/56/0d/11/560d11bacbf9e8d7a4d1a20d04b8562f.jpg",
+                "https://i.pinimg.com/originals/fd/6a/0e/fd6a0efe38d4f99147aa8706b95b0f24.jpg",
+            };
+            var rand = new Random((int)DateTime.Now.TimeOfDay.TotalSeconds);
+            int index = rand.Next(imageurl.Length);
+
+            return new List<ISendMessage>
+            {
+                new TextMessage($"hello"), new ImageMessage(imageurl[index], imageurl[index], null),
+            };
+        }
+
+        result = new List<ISendMessage>
+        {
+            new TextMessage($"Receive a sticker event message \nchannelId={channelId}  \nuserId={userId}")
+        };
+        return result;
     }
 
-    public async Task<List<ISendMessage>> ProcessStickerEventMessageAsync(string channelId, string userId,string packageId, string stickerId)
+    public async Task<List<ISendMessage>> ProcessStickerEventMessageAsync(string channelId, string userId,
+        string packageId, string stickerId)
     {
         var result = null as List<ISendMessage>;
 
@@ -58,7 +75,8 @@ public class LineService : ILineService
         return result;
     }
 
-    public async Task<List<ISendMessage>> ProcessImageEventMessageAsync(string channelId, string userId,string originalContentUrl,
+    public async Task<List<ISendMessage>> ProcessImageEventMessageAsync(string channelId, string userId,
+        string originalContentUrl,
         string previewImageUrl)
     {
         var result = null as List<ISendMessage>;
@@ -81,7 +99,8 @@ public class LineService : ILineService
         return result;
     }
 
-    public async Task<List<ISendMessage>> ProcessVideoEventMessageAsync(string channelId, string userId,string originalContentUrl, string previewImageUrl)
+    public async Task<List<ISendMessage>> ProcessVideoEventMessageAsync(string channelId, string userId,
+        string originalContentUrl, string previewImageUrl)
     {
         var result = null as List<ISendMessage>;
 
@@ -92,7 +111,8 @@ public class LineService : ILineService
         return result;
     }
 
-    public async Task<List<ISendMessage>> ProcessAudioEventMessageAsync(string channelId, string userId,string originalContentUrl, int duration)
+    public async Task<List<ISendMessage>> ProcessAudioEventMessageAsync(string channelId, string userId,
+        string originalContentUrl, int duration)
     {
         var result = null as List<ISendMessage>;
 
@@ -103,7 +123,8 @@ public class LineService : ILineService
         return result;
     }
 
-    public async Task<List<ISendMessage>> ProcessLocationEventMessageAsync(string channelId, string userId,string title, string address, float latitude, float longitude)
+    public async Task<List<ISendMessage>> ProcessLocationEventMessageAsync(string channelId, string userId,
+        string title, string address, float latitude, float longitude)
     {
         var result = null as List<ISendMessage>;
 

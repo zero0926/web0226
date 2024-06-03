@@ -10,21 +10,19 @@ public class memeService
         try
         {
             HttpClient client = new HttpClient();
-            client.GetAsync("")
-                
-            Product product = null;
-            HttpResponseMessage response = await client.GetAsync(path);
+            
+            HttpResponseMessage response = await client.GetAsync("https://meme.tw/wtf/api");
             if (response.IsSuccessStatusCode)
             {
-                product = await response.Content.ReadAsAsync<List<memeM>>();
+                result = await response.Content.ReadFromJsonAsync<List<memeM>>();
             }
-            return product;
         }
         catch (Exception exp)
         {
             Console.WriteLine(exp);
             throw;
         }
+
         return result;
     }
 }
