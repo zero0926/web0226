@@ -46,6 +46,9 @@ public class LineService : ILineService
                 "https://i.pinimg.com/564x/13/00/69/13006906dffc0691640f76b2f2f776ba.jpg",
                 "https://i.pinimg.com/564x/56/0d/11/560d11bacbf9e8d7a4d1a20d04b8562f.jpg",
                 "https://i.pinimg.com/originals/fd/6a/0e/fd6a0efe38d4f99147aa8706b95b0f24.jpg",
+                "https://i.pinimg.com/564x/04/0c/89/040c89e401849f04dc0bce603d129d8d.jpg"
+                "https://i.pinimg.com/564x/d9/6c/1f/d96c1ff9d09ac42a7d15c51711aa2889.jpg"
+                "https://i.pinimg.com/564x/5a/64/c6/5a64c6b5c634edec87975db0866dcfda.jpg"
             };
             var rand = new Random((int)DateTime.Now.TimeOfDay.TotalSeconds);
             int index = rand.Next(imageurl.Length);
